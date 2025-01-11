@@ -33,3 +33,13 @@ CREATE TABLE payments (
     payment_date DATE NOT NULL DEFAULT CURRENT_DATE,
     status VARCHAR(20) NOT NULL CHECK (status IN ('Paid', 'Pending', 'Failed'))
 );
+
+CREATE TABLE audit_log (
+    id SERIAL PRIMARY KEY,
+    action_time TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    action_type TEXT,
+    table_name TEXT,
+    user_name TEXT,
+    old_data JSONB,
+    new_data JSONB
+);
